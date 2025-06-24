@@ -64,6 +64,7 @@ public class EvaluadorSlot : MonoBehaviour
         {
             Debug.Log($"❌ Error: Se retiró la caja {idCaja} cuando se esperaba la caja {idEsperado}");
             // TODO:ERRORUWU
+            GameSession.AddQueueWrongAction();
 
             // Reproducir sonido de error
             if (sonidoError2 != null && audioSource != null)
@@ -81,6 +82,7 @@ public class EvaluadorSlot : MonoBehaviour
             caja.CambiarColor(Color.cyan);
             Debug.Log("✅ Caja retirada en el orden correcto");
             // !ACIERTOUWU
+            GameSession.AddQueueCorrectAction();
         }
     }
 
@@ -114,6 +116,7 @@ public class EvaluadorSlot : MonoBehaviour
         {
             Debug.LogWarning("❌ El orden no ha sido enviado");
             // TODO:ERRORUWU
+            GameSession.AddQueueWrongAction();
             if (sonidoOrdenNoEnviado != null && audioSource != null)
                 audioSource.PlayOneShot(sonidoOrdenNoEnviado);
 
@@ -130,6 +133,7 @@ public class EvaluadorSlot : MonoBehaviour
         if (idColocado == idEsperado)
         {
             // !ACIERTOUWU
+            GameSession.AddQueueCorrectAction();
             Debug.Log($"✅ Caja correcta en posición: {posicionEsperada}. ID esperado: {idEsperado}, ID colocado: {idColocado}");
 
             if (caja != null)
@@ -187,6 +191,7 @@ public class EvaluadorSlot : MonoBehaviour
         {
             Debug.Log($"❌ Caja incorrecta en posición: {posicionEsperada}. Esperado ID: {idEsperado}, pero se colocó: {idColocado}");
             // TODO:ERRORUWU
+            GameSession.AddQueueWrongAction();
 
             if (caja != null)
             {

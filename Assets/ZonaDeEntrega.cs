@@ -44,6 +44,7 @@ public class ZonaDeEntrega : MonoBehaviour
         if (idCaja == idEsperado)
         {
             // !ACIERTOUWU
+            GameSession.AddQueueCorrectAction();
             Debug.Log($"✅ Caja entregada correctamente: {idCaja}");
             caja.CambiarColor(Color.green);
             GameManager.instancia.ConfirmarCajaCorrecta();
@@ -59,6 +60,7 @@ public class ZonaDeEntrega : MonoBehaviour
                     audioReproducido = true;
                     Debug.Log("🔊 COMPLETADO!");
                     //! TIEMPO FINAL
+                    GameSession.QueueEndTimer();
                 }
             }
         }
@@ -66,6 +68,7 @@ public class ZonaDeEntrega : MonoBehaviour
         {
             Debug.Log($"❌ Caja incorrecta entregada: {idCaja}. Se esperaba: {idEsperado}");
             // TODO:ERRORUWU
+            GameSession.AddQueueWrongAction();
 
             // Reproducir sonido de error
             if (sonidoCajaIncorrecta != null && audioSource != null)

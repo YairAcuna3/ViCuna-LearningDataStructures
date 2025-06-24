@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         {
             instancia = this;
             //! TIEMPO INICIO
+            GameSession.QueueStartTimer();
         }
         else
         {

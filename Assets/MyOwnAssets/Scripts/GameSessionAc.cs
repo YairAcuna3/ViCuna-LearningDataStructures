@@ -7,13 +7,41 @@ public static class GameSession
     // *Intrumento: Precisión de las tareas
     public static int correctActions;
     public static int wrongActions;
+    public static int queueCorrectActions;
+    public static int queueWrongActions;
 
     // *Instrumento: Tiempo dedicado a tareas
     public static string startTime;
     public static string endTime;
+    public static string queueStartTime;
+    public static string queueEndTime;
 
     // *Instrumento: Tasa de finalización de tareas
     // el número de acciones correctas se divide entre 12 (total de tareas porque son 2 tareas por cubo y 6 cubos) en el escenario de pilas
+
+    public static void AddQueueCorrectAction()
+    {
+        queueCorrectActions++;
+        Debug.Log("💚 Acciones correctas: " + queueCorrectActions);
+    }
+
+    public static void AddQueueWrongAction()
+    {
+        queueWrongActions++;
+        Debug.Log("🔴 Acciones incorrectas: " + queueWrongActions);
+    }
+
+    public static void QueueStartTimer()
+    {
+        queueStartTime = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        Debug.Log("🕒 Inicio de la cola: " + queueStartTime);
+    }
+
+    public static void QueueEndTimer()
+    {
+        queueEndTime = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        Debug.Log("🕛 Fin de la cola: " + queueEndTime);
+    }
 
     public static void StartTimer()
     {
@@ -48,9 +76,9 @@ public static class GameSession
         }
     }
 
+    //* Tasa de finalización de tareas: acciones correctas / 12 (total de tareas)
     public static string GetCompletionRate()
     {
-        // Tasa de finalización de tareas: acciones correctas / 12 (total de tareas)
         if (correctActions == 0)
             return "0";
 
@@ -58,26 +86,33 @@ public static class GameSession
         return $"{completionRate}";
     }
 
+    //* Precisión de las tareas: acciones correctas / (acciones correctas + acciones incorrectas)
     public static string GetPrecisionRate()
     {
-        // Precisión de las tareas: acciones correctas / (acciones correctas + acciones incorrectas)
-        if (correctActions + wrongActions == 0)
+        if (correctActions + queueCorrectActions + wrongActions + queueWrongActions == 0)
             return "0";
 
-        float precisionRate = (float)correctActions / (correctActions + wrongActions);
+        float precisionRate = (float)(correctActions + queueCorrectActions) / (correctActions + queueCorrectActions + wrongActions + queueWrongActions);
         return $"{precisionRate}";
     }
 
     public static void GenerateStatsLog()
     {
         string logContent = $"===== ESTADISTICAS DE LA PARTIDA =====\n" +
-                            $"Acciones correctas: {correctActions}\n" +
-                            $"Acciones incorrectas: {wrongActions}\n" +
-                            $"Inicio del juego: {startTime}\n" +
-                            $"Fin del juego: {endTime}\n" +
+                            $"Pilas AC: {correctActions}\n" +
+                            $"Colas AC: {queueCorrectActions}\n" +
+                            $"Pilas AI: {wrongActions}\n" +
+                            $"Colas AI: {queueWrongActions}\n" +
+                            $"Acciones correctas: {correctActions + queueCorrectActions}\n" +
+                            $"Acciones incorrectas: {wrongActions + queueWrongActions}\n" +
+                            $"Pilas Start: {startTime}\n" +
+                            $"Pilas Queue Start: {queueStartTime}\n" +
+                            $"Pilas End: {endTime}\n" +
+                            $"Pilas Queue End: {queueEndTime}\n" +
                             $"Precision de las tareas: {GetPrecisionRate()}\n" +
                             $"Tasa de finalizacion: {GetCompletionRate()}\n" +
-                            $"Tiempo transcurrido: {GetElapsedTime(startTime, endTime)}";
+                            $"Tiempo pilas: {GetElapsedTime(startTime, endTime)}\n" +
+                            $"Tiempo colas: {GetElapsedTime(queueStartTime, queueEndTime)}";
 
 
         // Ruta de descargas según el sistema operativo

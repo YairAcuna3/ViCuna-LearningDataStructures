@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
     public void SalirDelJuego()
     {
         Debug.Log("Saliendo de la escena...");
+        GameSession.QueueEndTimer();
         SceneManager.LoadScene("principalMenu");
 
         // En el editor de Unity, esto no cerrar� el juego, pero en el build s�.

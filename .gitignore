@@ -73,3 +73,13 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignorar plugins grandes o binarios innecesarios
+/[Aa]ssets/FirebasePlugins/
+/[Aa]ssets/so/
+
+# Ignorar binarios grandes por seguridad
+*.so
+*.dll
+*.bundle
+*.a

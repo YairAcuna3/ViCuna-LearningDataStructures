@@ -12,6 +12,7 @@ public class AudioManagerPiles : MonoBehaviour
 
     public void Start()
     {
+        GameSession.resetStats();
         GameSession.StartTimer();
     }
     public void PlayOkPushHover()

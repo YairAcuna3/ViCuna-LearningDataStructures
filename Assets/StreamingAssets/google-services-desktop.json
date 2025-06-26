@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "374919576086",
+    "firebase_url": "https://vicuna-learning-default-rtdb.firebaseio.com",
+    "project_id": "vicuna-learning",
+    "storage_bucket": "vicuna-learning.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374919576086:android:a300425c5102bf4b095337",
+        "android_client_info": {
+          "package_name": "com.yairacuna.vicunalearning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYB3wCU0MQEkHSJdArrzNbwnCuyYXt41U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

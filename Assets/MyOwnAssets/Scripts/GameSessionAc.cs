@@ -19,6 +19,18 @@ public static class GameSession
     // *Instrumento: Tasa de finalización de tareas
     // el número de acciones correctas se divide entre 12 (total de tareas porque son 2 tareas por cubo y 6 cubos) en el escenario de pilas
 
+    public static void resetStats()
+    {
+        GameManagerPiles.correctActions = 0;
+        GameManagerPiles.wrongActions = 0;
+        correctActions = 0;
+        wrongActions = 0;
+        startTime = "";
+        endTime = "";
+
+        Debug.Log("🔄 Estadísticas reiniciadas del escenario pilas.");
+    }
+
     public static void AddQueueCorrectAction()
     {
         queueCorrectActions++;
